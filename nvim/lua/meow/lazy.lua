@@ -34,6 +34,10 @@ require("lazy").setup({
         end
     },
     'preservim/nerdtree',
+    {
+        'towolf/vim-helm',
+         ft = { "helm", "yaml" },
+    },
     'kyazdani42/nvim-web-devicons',
     'nvim-telescope/telescope.nvim',
     'williamboman/mason-lspconfig.nvim',
@@ -46,6 +50,10 @@ require("lazy").setup({
     "tpope/vim-fugitive",
     'L3MON4D3/LuaSnip',
     'saadparwaiz1/cmp_luasnip',
+    {
+        'nvim-treesitter/nvim-treesitter',
+        build = ':TSUpdate', -- Updates parsers after installation
+    },
     {
         "folke/which-key.nvim",
         event = "VeryLazy",
