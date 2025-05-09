@@ -19,7 +19,6 @@ vim.lsp.set_log_level("debug")
 
 -- Configure Lazy.nvim with your plugins
 require("lazy").setup({
-    'folke/lazy.nvim',
     {
         'rose-pine/neovim',
         as = 'rose-pine',
