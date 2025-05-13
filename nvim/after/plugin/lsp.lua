@@ -36,7 +36,7 @@ for _, server in ipairs(servers) do
     local config_dir = jdtls_path .. '/config_linux'
 
     local lombok_jar = '/home/meow/lombok.jar'
-    local java_home = '/usr/lib/jvm/java-17-openjdk-amd64'
+    local java_home = vim.fn.getenv("JAVA_HOME")
 
     local cmd = {
       'java',
@@ -57,7 +57,7 @@ for _, server in ipairs(servers) do
     }
 
     lspconfig.jdtls.setup({
-      cmd = cmd,
+      cmd = vim.tbl_flatten(cmd),
       root_dir = root_dir,
       on_attach = on_attach,
       capabilities = capabilities,
@@ -65,12 +65,16 @@ for _, server in ipairs(servers) do
         java = {
           home = java_home,
           configuration = {
+                        annotationProcessing = { enabled = true},
             runtimes = {
               {
-                name = "JavaSE-17",
+                name = "JavaSE-21",
                 path = java_home,
               },
             },
+            format = { enable = true },
+            contentProvider = { preferred = 'fernflower' }, -- Enhances decompiled content readability
+            autobuild = { enabled = true }, -- Ensure live updates with LSP
           },
         },
       },
