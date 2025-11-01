@@ -59,5 +59,16 @@ require("lazy").setup({
         config = function()
             require("which-key").setup {}
         end
-    }
+    },
+    {
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
+      config = function()
+        require("mason-tool-installer").setup({
+          ensure_installed = {
+            "ansible-lint",
+      },
+    })
+  end,
+}
+
 })
