@@ -18,6 +18,9 @@ function _G.SetFiletype()
   vim.bo.filetype = "yaml"
 end
 
+vim.api.nvim_create_user_command("FTA", function()
+  vim.bo.filetype = "yaml.ansible"
+end, {})
 vim.cmd [[
   augroup FiletypeDetection
     autocmd!
