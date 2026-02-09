@@ -26,17 +26,21 @@ require("lazy").setup({
             vim.cmd('colorscheme rose-pine')
         end
     },
-      {
+
+    {
         'williamboman/mason.nvim',
         config = function()
             require("mason").setup()
         end
     },
+
     'preservim/nerdtree',
+
     {
         'towolf/vim-helm',
-         ft = { "helm", "yaml" },
+        ft = { "helm", "yaml" },
     },
+
     'kyazdani42/nvim-web-devicons',
     'nvim-telescope/telescope.nvim',
     'williamboman/mason-lspconfig.nvim',
@@ -49,10 +53,9 @@ require("lazy").setup({
     "tpope/vim-fugitive",
     'L3MON4D3/LuaSnip',
     'saadparwaiz1/cmp_luasnip',
-    {
-        'nvim-treesitter/nvim-treesitter',
-        build = ':TSUpdate', -- Updates parsers after installation
-    },
+
+    { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate', config = function() local ok, configs = pcall(require, 'nvim-treesitter.configs') if not ok then return end configs.setup({ ensure_installed = { "lua", "dockerfile", "markdown", "helm", "yaml", "java", "bash" }, highlight = { enable = true, additional_vim_regex_highlighting = true, }, indent = { enable = true, }, }) end },
+
     {
         "folke/which-key.nvim",
         event = "VeryLazy",
@@ -60,15 +63,19 @@ require("lazy").setup({
             require("which-key").setup {}
         end
     },
+
     {
       "WhoIsSethDaniel/mason-tool-installer.nvim",
       config = function()
         require("mason-tool-installer").setup({
           ensure_installed = {
             "ansible-lint",
-      },
-    })
-  end,
-}
+          },
+        })
+      end,
+    },
 
+    {
+      'mfussenegger/nvim-jdtls',
+    },
 })
