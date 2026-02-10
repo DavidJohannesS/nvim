@@ -30,3 +30,24 @@ vim.api.nvim_set_hl(0, "DiffChange", { bg = "#2f2a3d", fg = "none" })  -- muted 
 vim.api.nvim_set_hl(0, "DiffDelete", { bg = "#3d1f1f", fg = "none" })  -- soft red
 vim.api.nvim_set_hl(0, "DiffText",   { bg = "#355d44", fg = "#ffffff", bold = true }) -- highlighted changed text
 vim.api.nvim_set_hl(0, "DiffBg", { bg = "#101a10" }) -- subtle green tint
+vim.o.tabline = "%!v:lua.MyTabline()"
+
+function MyTabline()
+  local s = ""
+  for i = 1, vim.fn.tabpagenr("$") do
+    local winnr = vim.fn.tabpagewinnr(i)
+    local bufnr = vim.fn.tabpagebuflist(i)[winnr]
+    local name = vim.fn.bufname(bufnr)
+
+    -- Extract filename only
+    local filename = vim.fn.fnamemodify(name, ":t")
+
+    -- Highlight active tab
+    if i == vim.fn.tabpagenr() then
+      s = s .. "%#TabLineSel#" .. " " .. filename .. " "
+    else
+      s = s .. "%#TabLine#" .. " " .. filename .. " "
+    end
+  end
+  return s .. "%#TabLineFill#"
+end
