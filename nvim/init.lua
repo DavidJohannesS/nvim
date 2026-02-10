@@ -21,6 +21,9 @@ end
 vim.api.nvim_create_user_command("FTA", function()
   vim.bo.filetype = "yaml.ansible"
 end, {})
+vim.api.nvim_create_user_command("FTH", function()
+  vim.bo.filetype = "yaml.helm"
+end, {})
 vim.cmd [[
   augroup FiletypeDetection
     autocmd!

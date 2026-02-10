@@ -1,7 +1,7 @@
 local mason_lspconfig = require("mason-lspconfig")
 
 mason_lspconfig.setup({
-  ensure_installed = { "jdtls","lua_ls", "ansiblels", "bashls", "groovyls", "ts_ls" },
+  ensure_installed = {"yamlls", "jdtls","lua_ls", "ansiblels", "bashls", "groovyls", "ts_ls" },
 })
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
