@@ -56,7 +56,7 @@ require("lazy").setup({
     'L3MON4D3/LuaSnip',
     'saadparwaiz1/cmp_luasnip',
 
-    { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate', config = function() local ok, configs = pcall(require, 'nvim-treesitter.configs') if not ok then return end configs.setup({ ensure_installed = { "lua", "dockerfile", "python", "markdown", "helm", "yaml", "java", "bash" }, highlight = { enable = true, additional_vim_regex_highlighting = true, }, indent = { enable = true, }, }) end },
+    { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate', config = function() local ok, configs = pcall(require, 'nvim-treesitter.configs') if not ok then return end configs.setup({ ensure_installed = { "lua", "dockerfile", "python", "markdown", "helm", "yaml", "go", "java", "bash" }, highlight = { enable = true, additional_vim_regex_highlighting = true, }, indent = { enable = true, }, }) end },
 
     {
         "folke/which-key.nvim",

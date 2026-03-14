@@ -15,7 +15,7 @@ end
 -- Non-Java LSP servers
 -- -------------------------
 
-local servers = { "lua_ls", "pylsp", "ansiblels", "bashls" }
+local servers = { "gopls", "lua_ls", "pylsp", "ansiblels", "bashls" }
 
 for _, server in ipairs(servers) do
   local opts = {
