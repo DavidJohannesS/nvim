@@ -1,7 +1,7 @@
 local mason_lspconfig = require("mason-lspconfig")
 
 mason_lspconfig.setup({
-  ensure_installed = {"yamlls", "jdtls","lua_ls", "ansiblels", "bashls", "groovyls", "ts_ls" },
+  ensure_installed = {"pylsp", "yamlls", "jdtls","lua_ls", "ansiblels", "bashls", "groovyls", "ts_ls" },
 })
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -15,7 +15,7 @@ end
 -- Non-Java LSP servers
 -- -------------------------
 
-local servers = { "lua_ls", "ansiblels", "bashls" }
+local servers = { "gopls", "lua_ls", "pylsp", "ansiblels", "bashls" }
 
 for _, server in ipairs(servers) do
   local opts = {
