@@ -1,10 +1,11 @@
--- Add your existing key mappings
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>q', builtin.find_files, {})
-vim.keymap.set('n', '<leader>gq', builtin.git_files, {})
-vim.keymap.set('n', '<leader>hf', function() 
+local builtin = require("telescope.builtin")
 
-  builtin.find_files({cwd = '~/'}); 
-  vim.keymap.set('n', '<leader>gq', function() builtin.find_files({ cwd = vim.fn.getcwd() }) end, { desc = 'Find files in current directory' })
-end, {})
-
+if vim.g.vscode then
+  -- VSCode version: use QuickOpen
+  vim.keymap.set("n", "<leader>q", function()
+    vim.fn.VSCodeNotify("workbench.action.quickOpen")
+  end, { desc = "VSCode: Find files" })
+else
+  -- Real Neovim version: use Telescope
+  vim.keymap.set("n", "<leader>q", builtin.find_files, { desc = "Telescope: Find files" })
+end
