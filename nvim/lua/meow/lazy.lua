@@ -73,6 +73,7 @@ require("lazy").setup({
           ensure_installed = {
             "ansible-lint",
             "yamllint",
+            "gopls",
           },
         })
       end,
