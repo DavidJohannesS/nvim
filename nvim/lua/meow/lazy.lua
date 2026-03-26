@@ -36,7 +36,28 @@ require("lazy").setup({
         end
     },
 
-    'preservim/nerdtree',
+{
+  "nvim-neo-tree/neo-tree.nvim",
+  branch = "v3.x",
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+    "nvim-tree/nvim-web-devicons",
+    "MunifTanjim/nui.nvim",
+  },
+  config = function()
+    require("neo-tree").setup({
+      filesystem = {
+        filtered_items = {
+          visible = true,
+          hide_dotfiles = false,
+          hide_gitignored = false,
+        },
+      },
+      enable_git_status = true,
+      enable_diagnostics = true,
+    })
+  end
+},
 
     {
         'towolf/vim-helm',
@@ -117,5 +138,10 @@ require("lazy").setup({
   keys = {
     { "<leader>u", "<cmd>UndotreeToggle<cr>", desc = "Toggle Undotree" },
   },
+},
+{
+  "lukas-reineke/indent-blankline.nvim",
+  main = "ibl",
+  opts = {}
 }
 })

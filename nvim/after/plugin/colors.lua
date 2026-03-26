@@ -3,8 +3,8 @@ function ColorMeow(color)
     color = color or "rose-pine"
     vim.cmd.colorscheme(color)
     -- Uncomment these if you want transparent backgrounds
-     vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-    vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+--     vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+--    vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 end
 
 ColorMeow()
@@ -51,3 +51,8 @@ function MyTabline()
   end
   return s .. "%#TabLineFill#"
 end
+vim.api.nvim_set_hl(0, "IblIndent", { fg = "#4a3340" })   -- your purple accent
+vim.api.nvim_set_hl(0, "IblScope",  { fg = "#98c379", bold = true }) -- your bright green
+require("ibl").setup {
+  scope = { enabled = true },
+}
