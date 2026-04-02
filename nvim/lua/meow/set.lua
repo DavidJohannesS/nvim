@@ -15,3 +15,4 @@ vim.keymap.set("n", "<leader>gd", ":Gvdiffsplit<CR>")
 vim.opt.undofile = true
 vim.opt.undodir = vim.fn.stdpath("state") .. "/undo"
 vim.keymap.set("n", "<leader>x", ":Neotree toggle<CR>", { desc = "Toggle Neo-tree" })
+vim.g.netrw_banner = 0
