@@ -169,5 +169,14 @@ require("lazy").setup({
     vim.keymap.set("n", "<leader>4", function() harpoon:list():select(4) end)
     vim.keymap.set("n", "<leader>5", function() harpoon:list():select(4) end)
   end
+},
+{
+  "folke/lazydev.nvim",
+  ft = "lua",
+  opts = {
+    library = {
+      { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+    },
+  },
 }
 })

@@ -1,5 +1,5 @@
 local mason_lspconfig = require("mason-lspconfig")
-
+require("lazydev").setup()
 mason_lspconfig.setup({
   ensure_installed = {"pylsp", "yamlls", "jdtls","lua_ls", "ansiblels", "bashls", "groovyls", "ts_ls" },
 })
