@@ -12,7 +12,6 @@ if not vim.loop.fs_stat(lazypath) then
   })
 end
 vim.opt.rtp:prepend(lazypath)
-vim.lsp.set_log_level("debug")
 require("lazy").setup({
     {
         'rose-pine/neovim',
@@ -63,9 +62,6 @@ require("lazy").setup({
     "tpope/vim-fugitive",
     'L3MON4D3/LuaSnip',
     'saadparwaiz1/cmp_luasnip',
-
-    { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate', config = function() local ok, configs = pcall(require, 'nvim-treesitter.configs') if not ok then return end configs.setup({ ensure_installed = { "lua", "dockerfile", "python", "markdown", "helm", "yaml", "go", "java", "bash" }, highlight = { enable = true, additional_vim_regex_highlighting = false , }, indent = { enable = true, }, }) end },
-
     {
         "folke/which-key.nvim",
         event = "VeryLazy",
@@ -153,7 +149,7 @@ require("lazy").setup({
     vim.keymap.set("n", "<leader>2", function() harpoon:list():select(2) end)
     vim.keymap.set("n", "<leader>3", function() harpoon:list():select(3) end)
     vim.keymap.set("n", "<leader>4", function() harpoon:list():select(4) end)
-    vim.keymap.set("n", "<leader>5", function() harpoon:list():select(4) end)
+    vim.keymap.set("n", "<leader>5", function() harpoon:list():select(5) end)
   end
 },
 {
@@ -168,5 +164,5 @@ require("lazy").setup({
 {
     "b0o/SchemaStore.nvim",
     lazy = true,
-}
+},
 })
