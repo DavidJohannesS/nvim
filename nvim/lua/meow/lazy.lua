@@ -1,8 +1,5 @@
--- init.lua
-
 local home = vim.fn.expand("$HOME")
 local obsidian_home = home .. "/gitrepos/home/GENERAL/notes.git/ws/main"
--- Bootstrap Lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -15,11 +12,7 @@ if not vim.loop.fs_stat(lazypath) then
   })
 end
 vim.opt.rtp:prepend(lazypath)
-
--- Set log level to debug
 vim.lsp.set_log_level("debug")
-
--- Configure Lazy.nvim with your plugins
 require("lazy").setup({
     {
         'rose-pine/neovim',
@@ -58,12 +51,6 @@ require("lazy").setup({
     })
   end
 },
-
-    {
-        'towolf/vim-helm',
-        ft = { "helm", "yaml" },
-    },
-
     'kyazdani42/nvim-web-devicons',
     'nvim-telescope/telescope.nvim',
     'williamboman/mason-lspconfig.nvim',
@@ -77,7 +64,7 @@ require("lazy").setup({
     'L3MON4D3/LuaSnip',
     'saadparwaiz1/cmp_luasnip',
 
-    { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate', config = function() local ok, configs = pcall(require, 'nvim-treesitter.configs') if not ok then return end configs.setup({ ensure_installed = { "lua", "dockerfile", "python", "markdown", "helm", "yaml", "go", "java", "bash" }, highlight = { enable = true, additional_vim_regex_highlighting = true, }, indent = { enable = true, }, }) end },
+    { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate', config = function() local ok, configs = pcall(require, 'nvim-treesitter.configs') if not ok then return end configs.setup({ ensure_installed = { "lua", "dockerfile", "python", "markdown", "helm", "yaml", "go", "java", "bash" }, highlight = { enable = true, additional_vim_regex_highlighting = false , }, indent = { enable = true, }, }) end },
 
     {
         "folke/which-key.nvim",
@@ -103,7 +90,6 @@ require("lazy").setup({
     {
       'mfussenegger/nvim-jdtls',
     },
-
 {
   'lewis6991/gitsigns.nvim',
   config = function()
@@ -178,5 +164,9 @@ require("lazy").setup({
       { path = "${3rd}/luv/library", words = { "vim%.uv" } },
     },
   },
+},
+{
+    "b0o/SchemaStore.nvim",
+    lazy = true,
 }
 })

@@ -1,58 +1,73 @@
 local mason_lspconfig = require("mason-lspconfig")
 require("lazydev").setup()
 mason_lspconfig.setup({
-  ensure_installed = {"pylsp", "yamlls", "jdtls","lua_ls", "ansiblels", "bashls", "groovyls", "ts_ls" },
+  ensure_installed = {"dockerls","pylsp", "helm_ls", "yamlls", "jdtls","lua_ls", "ansiblels", "bashls", "groovyls", "ts_ls" },
 })
-
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
 local on_attach = function(client, bufnr)
   local opts = { noremap = true, silent = true }
   vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
 end
-
 -- -------------------------
 -- Non-Java LSP servers
 -- -------------------------
-
-local servers = {"groovyls", "gospel", "lua_ls", "pylsp", "ansiblels", "bashls" }
-
+local servers = {"helm_ls","yamlls","dockerls","ts_ls", "groovyls", "gospel", "lua_ls", "pylsp", "ansiblels", "bashls" }
 for _, server in ipairs(servers) do
   local opts = {
     on_attach = on_attach,
     capabilities = capabilities,
   }
-
+if server == "yamlls" then
+    opts.settings = {
+      yaml = {
+        schemaStore = { enable = false, url = "" },
+        schemas = require('schemastore').yaml.schemas({}),
+      },
+    }
+  end
+  if server == "helm_ls" then
+    opts.filetypes = { "helm" }
+    opts.settings = {
+      ['helm-ls'] = {
+        yamlls = {
+          path = "yaml-language-server",
+          enabled = true,
+          diagnostics = {
+            enabled = true,
+          },
+          config = {
+            schemas = require('schemastore').yaml.schemas(),
+          }
+        }
+      }
+    }
+  end
+  if server == "ansiblels" then 
+    opts.filetypes = { "yaml.ansible" } 
+  end
+  if server == "ansiblels" then opts.filetypes = { "yaml.ansible" } end
+  if server == "helm_ls" then opts.filetypes = { "helm" } end
   vim.lsp.config(server, opts)
   vim.lsp.enable(server)
 end
-
 -- -------------------------
 -- JDTLS (Java)
 -- -------------------------
-
--- Load nvim-jdtls only when editing Java files
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "java",
   callback = function()
     local jdtls = require("jdtls")
-
     local root_markers = { ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" }
     local root_dir = require("jdtls.setup").find_root( { ".git"} )
-    --local parent = vim.fs.dirname(root_dir) while parent ~= nil do if vim.fn.filereadable(parent .. "/pom.xml") == 1 then root_dir = parent parent = vim.fs.dirname(parent) else break end end
-
     local home = vim.fn.expand("$HOME")
     local java_home = home .. "/.sdkman/candidates/java/current"
     local lombok_jar = home .. "/lombok.jar"
-
     local workspace_dir = vim.fn.stdpath("data")
       .. "/site/java/workspace/"
       .. vim.fn.fnamemodify(root_dir, ":p:h:t")
-
     local jdtls_path = vim.fn.stdpath("data") .. "/mason/packages/jdtls"
     local launcher_jar = vim.fn.glob(jdtls_path .. "/plugins/org.eclipse.equinox.launcher_*.jar")
     local config_dir = jdtls_path .. "/config_linux"
-
     local cmd = {
       "java",
       "-Declipse.application=org.eclipse.jdt.ls.core.id1",
@@ -70,7 +85,6 @@ vim.api.nvim_create_autocmd("FileType", {
       "-configuration", config_dir,
       "-data", workspace_dir,
     }
-
     local config = {
       cmd = cmd,
       root_dir = root_dir,
@@ -91,7 +105,6 @@ vim.api.nvim_create_autocmd("FileType", {
         },
       },
     }
-
     jdtls.start_or_attach(config)
   end,
 })
