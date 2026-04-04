@@ -16,3 +16,4 @@ vim.opt.undofile = true
 vim.opt.undodir = vim.fn.stdpath("state") .. "/undo"
 vim.keymap.set("n", "<leader>x", ":Neotree toggle<CR>", { desc = "Toggle Neo-tree" })
 vim.g.netrw_banner = 0
+vim.keymap.set('n', '<leader>s', ':set spell!<CR>', { desc = "Toggle Spellcheck" })
